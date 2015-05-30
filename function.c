@@ -24,6 +24,7 @@ void makeDummy()
 	dummy->prev = dummy;
 }
 
+// 전체 할당된 메모리 해제
 void freeAll(list_t *phonelist)
 {
 	node_t* tempNode;
@@ -238,81 +239,6 @@ void insertFromBufferToNode(node_t* curNode, char buffer[])
 }
 
 
-/*
-node_t* insertFromBufferToNode(list_t *phonelist, char buffer[])
-{
-	node_t *curNode, *nextNode;
-	char *ptr, *dataToken, *personToken;
-	char record[MAX_SAVED_CHARACTER_PER_RECORD];
-	char *tempString;
-	int i = 0, j = 1;
-	
-	personToken = strstr(buffer, "\n");
-	dataToken = strstr(buffer, " │ ");
-
-	// 더미 노드에 연결되는 첫 번째 노드로 입력
-	curNode = (node_t *)malloc(sizeof(node_t));
-	phonelist->head->next = curNode;
-	curNode->prev = phonelist->head;
-	count++;
-
-	while (*ptr != 1){
-		
-		record[i] = *ptr;
-
-		if (ptr == dataToken){
-
-			record[i] = '\0';
-
-			if (j == 1){ // 노드 데이터의 이름에 입력
-				tempString = removeSpace(record);
-				strcpy(curNode->data.name, tempString);
-				j = 2;
-			} else { // 노드 데이터의 전화번호에 입력
-				tempString = removeSpace(record);
-				strcpy(curNode->data.phone, tempString);
-				j = 1;
-			}
-
-			i = 0;
-			ptr += strlen(" │ ");
-			dataToken = strstr(ptr, " │ ");
-
-		} else if (ptr == personToken){
-
-			record[i] = '\0';
-			tempString = removeSpace(record);
-			strcpy(curNode->data.nickName, tempString);	// 노드 데이터의 별명에 입력
-
-			i = 0;
-			ptr++;
-			personToken = strstr(ptr, "\n");
-
-			if (personToken != NULL){ // 뒤에 더 입력될 연락처 정보가 있는 경우
-
-				nextNode = (node_t *)malloc(sizeof(node_t));
-				curNode->next = nextNode;
-				nextNode->prev = curNode;
-				curNode = nextNode;
-
-				count++;
-
-			} else {	// 더 이상 입력될 연락처 정보가 없는 경우
-				curNode->next = dummy;
-				dummy->prev = curNode;
-			}
-
-		} else{
-			ptr++;
-			i++;
-		}
-
-	}
-
-	return phonelist;
-}
-*/
-
 
 // 콘솔에서 데이터 입력받기
 node_t* inputData(void)
@@ -331,6 +257,7 @@ node_t* inputData(void)
 
 	return input;
 }
+
 
 // 이름 입력
 void nameInput(node_t *input)
@@ -427,6 +354,7 @@ void deleteNode(list_t *phonelist)
 	}
 }
 
+
 // 검색 옵션 (이름/전화번호 검색)
 int searchOption(int num)
 {
@@ -442,6 +370,7 @@ int searchOption(int num)
 	}
 	return num;
 }
+
 
 // 숫자 1, 2 외에 잘못된 입력 확인
 int inputCheck(char input[])

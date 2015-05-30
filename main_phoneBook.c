@@ -87,6 +87,7 @@ int main()
 		if (goOrStop == 2) break;
 	}
 
+	// 전체 메모리 해제
 	freeAll(phonelist);
 	
 	return 0;
